@@ -8,13 +8,12 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 from networkx.algorithms import community
-import random
+
 
 
 # Fijar semilla
-seed=2
-random.seed(seed)
-np.random.seed(seed)
+seed=2 # Para las comunidades de Louvain
+np.random.seed(seed) # Para graficar
 
 
 
@@ -40,8 +39,7 @@ comunidad_nodo = {}
 for i in range(len(comunidades)):
     for node in comunidades[i]:
         comunidad_nodo[node] = i
-    
-
+        
 
 #Colores para cada comunidad
 colores_comunidades = ["red", "blue", "green", "purple"]
@@ -49,30 +47,17 @@ colores_comunidades = ["red", "blue", "green", "purple"]
 
 
 #Listas para almacenar el tamaño de los nodos y sus colores  
-size=[]
-colores = []
-
-
-
-
-for node in G.nodes():
-    size.append((G.degree[node])*100)
- 
-    colores.append(colores_comunidades[comunidad_nodo[node]])
+size=[(G.degree[node])*100 for node in G.nodes()]
+colores = [colores_comunidades[comunidad_nodo[node]] for node in G.nodes()]
    
         
-
 
 # Calcular edge betweenness
 edge_bet = nx.edge_betweenness_centrality(G)
 
 
 #Lista para almacenar el grosor de las aristas basado en el edge betweenness
-aristas=[]
-
-
-for edge in G.edges():
-    aristas.append((edge_bet[edge])*50)
+aristas=[(edge_bet[edge])*50 for edge in G.edges()]
 
 
 
