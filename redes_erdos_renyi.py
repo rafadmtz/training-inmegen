@@ -5,38 +5,41 @@
 
 
 
-
-
-
-from platform import node
-
 import networkx as nx
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
 
-i=np.random.randint(0,1000)
-G=nx.erdos_renyi_graph(n=100, p=0.05, seed=i)
-
-
-
-
 #Lista para guardar los datos de la tabla
-tabla=[]   
+tabla=[]
+
+#numero de nodos de la red   
 num_nodos=100
+
+#probabilidad de conexion para las redes erdos renyi
 probabilidad_conexion=0.05
 
+
+
+
+#For para realizar los calculos para las 100 redes diferentes
 for i in range(100):
+
+
     
     G=nx.erdos_renyi_graph(n=num_nodos, p=probabilidad_conexion, seed=i)
-     
+
+
+    #Array de numpy con los grados de cada nodo de la red     
     grados=np.array([(G.degree[node]) for node in G.nodes()])
-    
+
+
+
+    #Obtener media de los grados, asi como el maximo y minimo
     grado_max=np.max(grados)
-    grado_min=np.min(grados)
-    
+    grado_min=np.min(grados)    
     media=np.mean(grados)
+    
     
     
     #Actualizar la lista tabla con los datos
@@ -61,8 +64,10 @@ df = pd.DataFrame(
 )
 
 print(df)
-    
 
+
+    
+#Crea un archivo csv con la tabla
 df.to_csv("erdos_renyi_tabla.csv", index=False)
 
 
