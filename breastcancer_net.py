@@ -21,7 +21,7 @@ import numpy as np
 import pandas as pd
 
 seed=2 # Para las comunidades de Louvain
-np.random.seed(seed) # Para graficar
+np.random.seed(seed)
 
 
 
